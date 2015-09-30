@@ -45,3 +45,4 @@ D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Web
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Web.Http.WebHost.xml
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.pdb
+D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.csprojResolveAssemblyReference.cache
