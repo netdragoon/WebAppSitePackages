@@ -1,0 +1,9 @@
+﻿@{  ViewBag.Title = "Index"; Layout = "~/Views/Shared/_LayoutPackages.cshtml"; }
+
+@{
+    Canducci.Zip.ZipCodeInfo info = ViewBag.ZipCodeInfo as Canducci.Zip.ZipCodeInfo;
+}
+
+<p>@info.Zip</p>
+<p>@info.City</p>
+<p>@info.Uf</p>
