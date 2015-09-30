@@ -11,6 +11,7 @@ namespace WebAppSitePackages.Controllers
         public ActionResult Index()
         {
             ZipCodeInfo zipcodeInfo = ZipCodeLoad.Find("19200000");
+
             ViewBag.ZipCodeInfo = zipcodeInfo;
             return View();
         }
