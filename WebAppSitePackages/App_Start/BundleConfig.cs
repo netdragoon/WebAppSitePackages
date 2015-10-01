@@ -24,7 +24,8 @@ namespace WebAppSitePackages
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(                      
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-route.js",
-                      "~/Scripts/angular-ui-router.js",
+                      "~/Scripts/angular-ui-router.js",                      
+                      "~/Scripts/moment-with-locales.js",                      
                       "~/Content/app.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
