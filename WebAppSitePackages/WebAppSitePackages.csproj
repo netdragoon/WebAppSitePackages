@@ -143,11 +143,19 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\docs.min.css" />
     <Content Include="Content\navbar-fixed-top.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="image\1443674962_mailbox.png" />
+    <Content Include="image\1443674963_mailbox.png" />
+    <Content Include="image\1443674964_mailbox.png" />
+    <Content Include="image\1443674965_mailbox.png" />
+    <Content Include="image\1443674967_mailbox.png" />
+    <Content Include="image\1443677268_Money-Increase.png" />
+    <Content Include="image\zipcode.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
