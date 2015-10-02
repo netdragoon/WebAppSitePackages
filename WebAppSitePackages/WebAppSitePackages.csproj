@@ -166,6 +166,7 @@
     <Content Include="image\1443674965_mailbox.png" />
     <Content Include="image\1443674967_mailbox.png" />
     <Content Include="image\1443677268_Money-Increase.png" />
+    <Content Include="image\ajax-loader.gif" />
     <Content Include="image\zipcode.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />

@@ -14,6 +14,7 @@ D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\WebAppSite
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\WebAppSitePackages.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\WebAppSitePackages.pdb
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Antlr3.Runtime.dll
+D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.QuoteDolar.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.Zip.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Microsoft.Web.Infrastructure.dll
@@ -30,6 +31,7 @@ D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Web
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Web.WebPages.Razor.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\WebGrease.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Antlr3.Runtime.pdb
+D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.QuoteDolar.pdb
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.Zip.pdb
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Newtonsoft.Json.xml
@@ -43,7 +45,6 @@ D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Web
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Net.Http.Formatting.xml
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Web.Http.xml
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\System.Web.Http.WebHost.xml
+D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.csprojResolveAssemblyReference.cache
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.pdb
-D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.QuoteDolar.dll
-D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.QuoteDolar.pdb

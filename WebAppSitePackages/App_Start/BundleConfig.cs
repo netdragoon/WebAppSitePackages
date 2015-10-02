@@ -32,7 +32,6 @@ namespace WebAppSitePackages
                       "~/Content/bootstrap.css",
                       "~/Content/docs.min.css", 
                       "~/Content/navbar-fixed-top.css"));
-
             
 
         }
