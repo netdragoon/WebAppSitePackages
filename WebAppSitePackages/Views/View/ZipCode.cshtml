@@ -1,0 +1,85 @@
+﻿@{ Layout = null; }
+
+<div class="panel panel-default" ng-controller="zipcode">
+    <div class="panel-heading">BUSCA DE CEP</div>
+    <div class="panel-body" style="min-height:450px">
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>Informe os dados do CEP</h5>
+                <hr />
+                <div class="form-group col-lg-10" style="height:40px;">
+                    <form ng-submit="submit();" class="form-inline" role="form" id="form1" style="width:100%">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cep" ng-model="cep" placeholder="Digite o CEP" required="required" maxlength="8" autofocus pattern="\d{8}" only-num>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span> Buscar
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="clear();">
+                            <span class="glyphicon glyphicon-remove"></span> Limpar
+                        </button>
+                    </form>
+                    <br />                
+                    <div ng-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+                </div>
+                <div class="form-group col-lg-2" style="height:40px;">
+                    <p ng-if="loading"><img src="~/image/ajax-loader.gif" border="0" style="border:0px; vertical-align:middle" /></p>
+                </div>
+                
+            </div>
+            <div class="col-lg-6">
+                <h5>Resultado da Busca</h5>
+                <hr />
+                <div ng-if="data.Erro == false">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <em>Número:</em>
+                                    <p class="text-primary">{{data.Zip}}</p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.Gia">
+                                <td>
+                                    <em>Gia:</em>
+                                    <p class="text-primary">{{data.Gia}}</p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.Ibge">
+                                <td>
+                                    <em>Ibge:</em>
+                                    <p class="text-primary">{{data.Ibge}}</p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.Address">
+                                <td>
+                                    <em>Endereço:</em>
+                                    <p class="text-primary">{{data.Address}}</p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.District">
+                                <td>
+                                    <em>Bairro:</em>
+                                    <p class="text-primary">{{data.District}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <em>Cidade / UF:</em>
+                                    <p class="text-primary">{{data.City}} {{data.UF}}</p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.Complement">
+                                <td>
+                                    <em>Complemento:</em>
+                                    <p class="text-primary">{{data.Complement}}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a href="/#/" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a></div>
+</div>

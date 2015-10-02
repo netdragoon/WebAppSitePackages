@@ -1,0 +1,71 @@
+﻿@{ Layout = null; }
+<div class="panel panel-default" ng-controller="address">
+    <div class="panel-heading">BUSCA DE CEP POR Endereço</div>
+    <div class="panel-body" style="min-height:450px">
+        <div class="row">
+            <div class="col-lg-12">
+                <h5>Informe os dados da Busca</h5>
+                <hr />
+                <form ng-submit="submit();" class="" role="form" id="form1" style="width:100%">
+                    <div class="row">
+                        <div class="form-group col-lg-2">
+                            @Html.DropDownList("uf", (SelectList)ViewBag.uf, new { ng_model = "uf", @id = "uf", @class = "form-control", required = "required", autofocus = "autofocus" })
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <input type="text" class="form-control" id="city" ng-model="city" placeholder="Digite a Cidade" required="required" maxlength="50">
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <input type="text" class="form-control" id="address" ng-model="address" placeholder="Digite o Endereço" required="required" maxlength="50">
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search"></span> Buscar
+                            </button>
+                            <button type="button" class="btn btn-danger" ng-click="clear();">
+                                <span class="glyphicon glyphicon-remove"></span> Limpar
+                            </button>
+                        </div>
+                        <div class="form-group col-lg-1" style="height:40px;">
+                            <p ng-if="loading"><img src="~/image/ajax-loader.gif" border="0" style="border:0px; vertical-align:middle" /></p>
+                        </div>
+                    </div>
+                </form>
+                <br />
+                <div ng-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+            </div>
+            <div class="col-lg-12">
+                <h5>Resultado da Busca</h5>
+                <p><em>Cidade: </em> <code>{{city}}</code> </p>
+                <p><em>Unidade Federativa: </em> <code>{{uf}}</code></p>
+                <p><em>Endereço: </em> <code>{{address}}</code></p>
+                <p><em>Total encontrados: </em> <code>{{data.length}}</code></p>
+                <hr />
+                <table class="table table-condensed table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Gia</th>
+                            <th>IBGE</th>
+                            <th>Endereço</th>
+                            <th>Bairro</th>
+                            @*<th>Cidade / UF</th>*@
+                            <th>Complemento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in data">
+                            <td>{{item.Zip}}</td>
+                            <td>{{item.Gia}} </td>
+                            <td>{{item.Ibge}}</td>
+                            <td>{{item.Address}}</td>
+                            <td>{{item.District}}</td>
+                            @*<td>{{item.City}} / {{item.Uf}}</td>*@
+                            <td>{{item.Complement}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a href="/#/" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a></div>
+</div>
