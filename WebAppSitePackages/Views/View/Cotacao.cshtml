@@ -1,7 +1,10 @@
 ﻿@{ Layout = null; }
 <div class="panel panel-default" ng-controller="cotacao">
-    <div class="panel-heading">COTAÇÃO DE DOLAR</div>
+    <div class="panel-heading">COTAÇÃO DE DOLAR </div>    
     <div class="panel-body" style="min-height:450px">
+        <p>
+            <small><em>Data e Hora Atual:</em> @String.Format("{0:dd/MM/yyyy HH:mm:ss}", DateTime.Now)</small>
+        </p>
         <div ng-if="!data.Name">
             <p><img src="~/image/ajax-loader.gif" border="0" style="border:0px; vertical-align:middle" /></p>
         </div>
