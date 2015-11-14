@@ -1,0 +1,64 @@
+﻿@{ Layout = null; }
+
+<div class="panel panel-default" ng-controller="forecast">
+    <div class="panel-heading">PREVISAO DO TEMPO</div>
+    <div class="panel-body" style="min-height:450px">
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>Informe o nome da Cidade</h5>
+                <hr />
+                <div class="form-group col-lg-10" style="height:40px;">
+                    <form ng-submit="submit();" class="form-inline" role="form" id="form1" style="width:100%">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="name" ng-model="name" placeholder="Digite o nome da cidade ou parte do nome" required="required" autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span> Buscar
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="clear();">
+                            <span class="glyphicon glyphicon-remove"></span> Limpar
+                        </button>
+                    </form>
+                    <br />
+                    <div ng-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+                </div>
+                <div class="form-group col-lg-2" style="height:40px;">
+                    <p ng-if="loading"><img src="~/image/ajax-loader.gif" border="0" style="border:0px; vertical-align:middle" /></p>
+                </div>
+                <div class="col-lg-12">
+                    
+                    <div class="list-group">                       
+                        <a href="javascript:;" ng-click="load(item.Id)" class="list-group-item" ng-repeat="item in cities">{{item.Name}} / {{item.Uf}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h5>Informações da Previsão do Tempo</h5>
+                <hr />
+                <div ng-if="prevision.Name">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Cidade</div>
+                        <div class="panel-body">
+                            <p>Identificação Cidade: {{prevision.Id}}</p>
+                            <p><i>Cidade/Uf:</i> <strong>{{prevision.Name}} / {{prevision.Uf}}</strong></p>
+                            <p><i>Atualizada em:</i> <strong>{{prevision.UpdatedBR}}</strong></p>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Próximas Datas</div>
+                        <div class="panel-body">
+                            <div ng-repeat="day in prevision.Days" class="alert alert-info" role="alert">
+                                <div><i>Data:</i> <strong>{{day.DataBR}}</strong></div>
+                                <div><i>Minima:</i> <strong>{{day.Min}}º</strong></div>
+                                <div><i>Máxima:</i> <strong>{{day.Max}}º</strong></div>
+                                <div><i>IUV:</i> <strong>{{day.Iuv}}</strong></div>
+                                <div><i>Status:</i> <strong>{{day.TimeTerm.Description}}</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a href="/#/" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a></div>
+</div>
