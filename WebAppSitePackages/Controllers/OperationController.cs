@@ -87,38 +87,51 @@ namespace WebAppSitePackages.Controllers
 
         #region Forecast
         [HttpPost]
+        [Route("cities")]
         public async Task<JsonResult> ForecastCities(string name)
         {
             try
             {
-                ICities cities = null;
-                using (ICityForecast fc = new CityForecast())
+                if (!string.IsNullOrEmpty(name))
                 {
-                    cities = await fc.CitiesAsync(name);
+                    ICities cities = null;
+
+                    using (ICityForecast fc = new CityForecast())
+                    {
+                        cities = await fc.CitiesAsync(name.WithoutAccents());
+                    }
+                    return Json(cities, JsonRequestBehavior.DenyGet);
                 }
-                return Json(cities, JsonRequestBehavior.DenyGet);
             }
             catch
             {
                 return Json(new string[] { }, JsonRequestBehavior.DenyGet);
             }
+
+            return Json(new string[] { }, JsonRequestBehavior.DenyGet);
         }
         [HttpPost]
-        public async Task<JsonResult> ForecastPrevision(int Id, int Quant)
+        [Route("prevision")]
+        public async Task<JsonResult> ForecastPrevision(int? Id, int? Count = 4)
         {
             try
             {
                 IPrevision prev = null;
-                using (ICityForecast fc = new CityForecast())
-                {
-                    prev = await fc.ForecastAsync(Id, (Quant == 4 ? ForecastDay.D4 : ForecastDay.D7));
-                }                
-                return Json(prev, JsonRequestBehavior.DenyGet);
+                if (Id.HasValue)
+                {                    
+                    using (ICityForecast fc = new CityForecast())
+                    {
+                        prev = await fc.ForecastAsync(Id.Value, ((Count.HasValue && Count == 7) ? ForecastDay.D7 : ForecastDay.D4));
+                    }
+                    return Json(prev, JsonRequestBehavior.DenyGet);
+                }
             }
             catch
             {
                 return Json(new string[] { }, JsonRequestBehavior.DenyGet);
             }
+
+            return Json(new string[] { }, JsonRequestBehavior.DenyGet);
         }
         #endregion Forecast
     }

@@ -62,8 +62,7 @@ app.controller('cotacao', function ($scope, $routeParams, $http) {
         $http.post('/operation/cotacao', { })
                 .success(function (data) {
                     data.dateBR = moment(data.Date).format('DD/MM/YYYY');
-                    $scope.data = data;
-                    console.log(data);
+                    $scope.data = data;                    
 
                 })
                 .error(function (data) {
@@ -166,5 +165,61 @@ app.controller('zipcode', function ($scope, $routeParams, $http) {
 app.controller('forecast', function ($scope, $routeParams, $http)
 {
     $scope.loading = false;
+    $scope.name = '';
+    $scope.cities = [];
+    $scope.prevision = {};
+    $scope.message = '';
+
+    $scope.clear = function () {
+        $scope.loading = false;
+        $scope.name = '';
+        $scope.cities = [];
+        $scope.prevision = {};
+        $scope.message = '';
+    }
+
+    $scope.submit = function () {
+        if ($scope.name !== '' && $scope.name.length > 2) {
+            $scope.loading = true;
+            $http.post('/operation/cities', { 'name': $scope.name })
+                .success(function (data) {
+                    $scope.cities = data.Citys;
+                    $scope.loading = false;
+                    if (parseInt(data.Count) === 0)
+                    {
+                        $scope.message = 'Cidade inexistente ...';
+                    }
+                })
+                .error(function (data) {
+                    $scope.clear();
+                });
+        }
+        else
+        {
+            alert('Digite a cidade com no minimo 3 letras')    
+        }
+    }
+
+    $scope.load = function(Id)
+    {
+        $scope.loading = true;
+        $http.post('/operation/prevision', { 'Id': Id, 'Quant': 4 })
+            .success(function (data) {                
+                $scope.prevision = data;
+                $scope.prevision.Id = Id;
+                $scope.prevision.UpdatedBR =
+                    moment(data.Update).format('DD/MM/YYYY');
+                for (i = 0; i < $scope.prevision.Days.length; i++)
+                {
+                    $scope.prevision.Days[i].DataBR =
+                        moment($scope.prevision.Days[i].Data)
+                            .format('DD/MM/YYYY');
+                }
+                $scope.loading = false;
+            })
+            .error(function (data) {
+                $scope.clear();
+            });
+    }
 
 })
