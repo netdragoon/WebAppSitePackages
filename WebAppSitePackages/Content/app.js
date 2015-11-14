@@ -38,6 +38,10 @@ app.config(['$routeProvider',
               templateUrl: '/view/address',
               controller: 'address'
           })
+          .when('/forecast', {
+              templateUrl: '/view/forecast',
+              controller: 'forecast'
+          })
           .otherwise({ redirectTo: '/' });
   }]);
 app.controller('menu', function ($scope, $routeParams, $http) {
@@ -159,3 +163,8 @@ app.controller('zipcode', function ($scope, $routeParams, $http) {
     $scope.clear();
 
 });
+app.controller('forecast', function ($scope, $routeParams, $http)
+{
+    $scope.loading = false;
+
+})

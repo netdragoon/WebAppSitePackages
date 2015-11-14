@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Canducci.Forecast, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Canducci.Forecast.0.0.1\lib\net451\Canducci.Forecast.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Canducci.QuoteDolar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CanducciQuoteDolar.1.0.0\lib\net451\Canducci.QuoteDolar.dll</HintPath>
       <Private>True</Private>
@@ -166,6 +170,7 @@
     <Content Include="image\1443674965_mailbox.png" />
     <Content Include="image\1443674967_mailbox.png" />
     <Content Include="image\1443677268_Money-Increase.png" />
+    <Content Include="image\1447477148_Weather.png" />
     <Content Include="image\ajax-loader.gif" />
     <Content Include="image\zipcode.png" />
     <Content Include="Scripts\angular-animate.js" />
@@ -1010,6 +1015,7 @@
     <Content Include="Views\View\Home.cshtml" />
     <Content Include="Views\View\ZipCode.cshtml" />
     <Content Include="Views\View\Address.cshtml" />
+    <Content Include="Views\View\Forecast.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

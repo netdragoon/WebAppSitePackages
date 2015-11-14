@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Canducci.Zip;
 using Canducci.QuoteDolar;
+using Canducci.Forecast;
+using Canducci.Forecast.Interfaces;
+using System.Threading.Tasks;
+
 namespace WebAppSitePackages.Controllers
 {
     [RoutePrefix("operation")]
@@ -82,5 +84,42 @@ namespace WebAppSitePackages.Controllers
 
         }
         #endregion AddressOperation
+
+        #region Forecast
+        [HttpPost]
+        public async Task<JsonResult> ForecastCities(string name)
+        {
+            try
+            {
+                ICities cities = null;
+                using (ICityForecast fc = new CityForecast())
+                {
+                    cities = await fc.CitiesAsync(name);
+                }
+                return Json(cities, JsonRequestBehavior.DenyGet);
+            }
+            catch
+            {
+                return Json(new string[] { }, JsonRequestBehavior.DenyGet);
+            }
+        }
+        [HttpPost]
+        public async Task<JsonResult> ForecastPrevision(int Id, int Quant)
+        {
+            try
+            {
+                IPrevision prev = null;
+                using (ICityForecast fc = new CityForecast())
+                {
+                    prev = await fc.ForecastAsync(Id, (Quant == 4 ? ForecastDay.D4 : ForecastDay.D7));
+                }                
+                return Json(prev, JsonRequestBehavior.DenyGet);
+            }
+            catch
+            {
+                return Json(new string[] { }, JsonRequestBehavior.DenyGet);
+            }
+        }
+        #endregion Forecast
     }
 }

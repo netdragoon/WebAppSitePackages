@@ -37,6 +37,12 @@ namespace WebAppSitePackages.Controllers
             return View();
         }
 
+        [Route("forecast")]
+        public ActionResult Forecast()
+        {
+            return View();
+        }
+
         private IEnumerable<KeyValuePair<object, object>> Itens()
         {
             Array itens = Enum.GetValues(typeof(ZipCodeUF));
