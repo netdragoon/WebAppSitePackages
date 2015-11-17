@@ -49,3 +49,4 @@ D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebA
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.pdb
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.Forecast.dll
 D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\bin\Canducci.Forecast.pdb
+D:\Sites\WebAppSitePackages\WebAppSitePackages\WebAppSitePackages\obj\Debug\WebAppSitePackages.csprojResolveAssemblyReference.cache
