@@ -1,0 +1,68 @@
+﻿@{ Layout = null; }
+<div class="panel panel-default" ng-controller="gravatar">
+    <div class="panel-heading">BUSCA DO GRAVATAR</div>
+    <div class="panel-body" style="min-height:450px">
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>Informe o seu E-mail do Gravatar</h5>
+                <hr />
+                <div class="form-group col-lg-11" style="height:40px;">
+                    <form ng-submit="submit();" class="form-inline" role="form" id="form1" style="width:100%">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" ng-model="email" placeholder="Digite o e-mail" required="required" maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <select ng-model="width" id="width" name="width" class="form-control">
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="300">300</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span> Buscar
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="clear();">
+                            <span class="glyphicon glyphicon-remove"></span> Limpar
+                        </button>
+                    </form>
+                    <br />
+                    <div ng-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+                </div>
+                <div class="form-group col-lg-1" style="height:40px;">
+                    <p ng-if="loading"><img src="/image/ajax-loader.gif" border="0" style="border:0px; vertical-align:middle" /></p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h5>Resultado da Busca</h5>
+                <hr />
+                <div ng-if="data.erro == false">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <em>E-mail:</em>
+                                    <p class="text-primary">{{data.email}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <em>Tamanho:</em>
+                                    <p class="text-primary">{{data.width}}</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <em>Imagem:</em>
+                                    <p>
+                                        <img ng-src="{{data.image}}" border="0" />
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a href="/#/" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a></div>
+</div>
