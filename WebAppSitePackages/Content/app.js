@@ -257,6 +257,11 @@ app.controller('gravatar', function ($scope, $routeParams, $http)
                     {
                         $scope.data = data.item;
                         $scope.data.erro = false;
+                        $scope.message = '';
+                    }
+                    else
+                    {
+                        $scope.message = 'E-mail não encontrado';
                     }
                     $scope.loading = false;
                 })
