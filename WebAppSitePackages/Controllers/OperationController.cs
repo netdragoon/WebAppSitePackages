@@ -5,6 +5,8 @@ using Canducci.Zip;
 using Canducci.QuoteDolar;
 using Canducci.Forecast;
 using Canducci.Forecast.Interfaces;
+using Canducci.Gravatar;
+using Canducci.Gravatar.Validation;
 using System.Threading.Tasks;
 
 namespace WebAppSitePackages.Controllers
@@ -134,5 +136,54 @@ namespace WebAppSitePackages.Controllers
             return Json(new string[] { }, JsonRequestBehavior.DenyGet);
         }
         #endregion Forecast
+
+        #region Gravatar
+        [HttpPost]
+        [Route("gravatar")]
+        public JsonResult Gravatar(string email, int? width = 100)
+        {            
+            try               
+            {            
+                if (Assertion.IsEmail(email))
+                {
+                    IEmail Email = Canducci.Gravatar.Email.Parse(email);
+
+                    IAvatarFolder folder = new AvatarFolder("image/", Server.MapPath("~"));
+
+                    IAvatarConfiguration config =
+                        new AvatarConfiguration(email, folder, width.Value);
+
+                    using (IAvatar avatar = new Avatar(config))
+                    {
+                        if (!avatar.Exists())
+                        {
+                            avatar.Save();
+                        }
+
+                        var model = new { email = email, image = "/" + avatar.WebPath(), width = width };
+
+                        return Json(GravatarJson(false, "Ok", model), JsonRequestBehavior.DenyGet);
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {                
+                return Json(GravatarJson(true, ex.Message), JsonRequestBehavior.DenyGet);
+            }
+            return Json(GravatarJson(false, "E-mail inválid"), JsonRequestBehavior.DenyGet);
+
+        }
+        protected dynamic GravatarJson(bool error, string message, object model = null)
+        {
+            dynamic _return = new { error = error, message = message };
+            if (model != null)
+            {
+                _return = new { error = error, message = message, item = model };
+            }
+            return _return;
+        }
+        #endregion Gravatar
+
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Canducci.Forecast;
 using Canducci.Zip;
 using Canducci.QuoteDolar;

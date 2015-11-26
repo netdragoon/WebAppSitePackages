@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Canducci.Zip;
 using System.Collections;
@@ -51,6 +49,12 @@ namespace WebAppSitePackages.Controllers
             {                
                 yield return new KeyValuePair<object, object>(collection.Current, collection.Current);
             }
+        }
+
+        [Route("gravatar")]
+        public ActionResult Gravatar()
+        {
+            return View();
         }
     }
 }

@@ -42,6 +42,10 @@ app.config(['$routeProvider',
               templateUrl: '/view/forecast',
               controller: 'forecast'
           })
+          .when('/gravatar', {
+              templateUrl: '/view/gravatar',
+              controller: 'gravatar'
+          })
           .otherwise({ redirectTo: '/' });
   }]);
 app.controller('menu', function ($scope, $routeParams, $http) {
@@ -222,4 +226,42 @@ app.controller('forecast', function ($scope, $routeParams, $http)
             });
     }
 
-})
+});
+app.controller('gravatar', function ($scope, $routeParams, $http)
+{
+    $scope.loading = false;
+    $scope.data = {};    
+    $scope.message = '';
+    $scope.email = '';
+    $scope.width = '100';
+
+    $scope.clear = function () {
+        $scope.width = '100';
+        $scope.loading = false;
+        $scope.data = {};
+        $scope.message = '';
+        $scope.email = '';
+    }
+
+    $scope.submit = function () {
+        if ($scope.email !== '') {
+            $scope.loading = true;
+            $http.post('/operation/gravatar', { 'email': $scope.email, 'width': parseInt($scope.width) })
+                .success(function (data) {
+                    if (data.error == false)
+                    {
+                        $scope.data = data.item;
+                        $scope.data.erro = false;
+                    }
+                    $scope.loading = false;
+                })
+                .error(function (data) {
+                    $scope.clear();
+                });
+        }
+        else {
+            alert('Digite o e-mail não existe')
+        }
+    }
+    $scope.clear();
+});
