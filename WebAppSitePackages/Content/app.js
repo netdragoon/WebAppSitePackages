@@ -59,6 +59,7 @@ app.controller('cotacao', function ($scope, $routeParams, $http) {
     $scope.clear = function()
     {
         $scope.data = { 'Name': '' };
+        ancoraSet("up");
     }
     $scope.submit = function()
     {
@@ -92,6 +93,7 @@ app.controller('address', function ($scope, $routeParams, $http) {
         $scope.message = '';
         $scope.loading = false;
         $("#uf").focus();
+        ancoraSet("up");
     }
 
     $scope.submit = function ()
@@ -131,6 +133,7 @@ app.controller('zipcode', function ($scope, $routeParams, $http) {
         $scope.message = '';
         $scope.loading = false;
         $("#cep").focus();
+        ancoraSet("up");
     }
 
     $scope.submit = function ()
@@ -180,6 +183,7 @@ app.controller('forecast', function ($scope, $routeParams, $http)
         $scope.cities = [];
         $scope.prevision = {};
         $scope.message = '';
+        ancoraSet("up");
     }
 
     $scope.submit = function () {
@@ -241,6 +245,7 @@ app.controller('gravatar', function ($scope, $routeParams, $http)
         $scope.data = {};
         $scope.message = '';
         $scope.email = '';
+        ancoraSet("up");
     }
 
     $scope.submit = function () {

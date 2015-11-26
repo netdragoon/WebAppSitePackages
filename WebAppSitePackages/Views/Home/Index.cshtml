@@ -1,7 +1,12 @@
 ﻿@{  ViewBag.Title = "Index"; Layout = "~/Views/Shared/_LayoutPackages.cshtml"; }
+<span id="up" nam="up"></span>
 <div ng-view></div>
-
-
+<script type="text/javascript">
+    function ancoraSet(id)
+    {
+        $('html, body').animate({ scrollTop: 0 }, 'slow');
+    }
+</script>
 
 
     @*<div class="row">
