@@ -25,14 +25,15 @@ namespace WebAppSitePackages
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-route.js",
                       "~/Scripts/angular-ui-router.js",                      
-                      "~/Scripts/moment-with-locales.js",                      
+                      "~/Scripts/moment-with-locales.js",
+                      "~/Scripts/iframe_api.js",
+                      "~/Scripts/angular-youtube-mb.js",                    
                       "~/Content/app.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/docs.min.css", 
-                      "~/Content/navbar-fixed-top.css"));
-            
+                      "~/Content/navbar-fixed-top.css"));            
 
         }
     }

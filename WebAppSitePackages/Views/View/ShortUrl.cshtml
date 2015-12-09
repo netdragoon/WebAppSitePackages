@@ -1,0 +1,60 @@
+﻿@{ Layout = null; }
+
+<div class="panel panel-default" ng-controller="shorturl">
+    <div class="panel-heading">SHORT URL (Encurtador URL)</div>
+    <div class="panel-body" style="min-height:450px">
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>Informe o Endereço de Internet</h5>
+                <hr />
+                <div class="form-group col-lg-10" style="height:40px;">
+                    <form ng-submit="submit();" class="form-inline" role="form" id="form1" style="width:100%">
+                        <div class="form-group">
+                            <input type="url" class="form-control" id="url" ng-model="url" placeholder="Digite o endereço" required="required" autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span> Buscar
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="clear();">
+                            <span class="glyphicon glyphicon-remove"></span> Limpar
+                        </button>
+                    </form>
+                    <br />
+                    <div ng-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+                </div>
+                <div class="form-group col-lg-2" style="height:40px;">
+                    <p ng-if="loading"><img src="/image/ajax-loader.gif" border="0" style="border:0px; vertical-align:middle" /></p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h5>Resultado</h5>
+                <hr />
+                <div ng-if="data.erro == false">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <em>Url encurtada:</em>
+                                    <p class="text-primary">{{data.shorturl}}</p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.Keyword">
+                                <td>
+                                    <em>Keyword (Palavra Chave):</em>
+                                    <p class="text-primary">{{data.Keyword}}</p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.url">
+                                <td>
+                                    <em>Url longa (normal):</em>
+                                    <p class="text-primary">{{data.url}}</p>
+                                </td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a href="/#/" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a></div>
+</div>

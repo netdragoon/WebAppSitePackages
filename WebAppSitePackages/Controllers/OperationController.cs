@@ -7,8 +7,13 @@ using Canducci.Forecast;
 using Canducci.Forecast.Interfaces;
 using Canducci.Gravatar;
 using Canducci.Gravatar.Validation;
+using Canducci.ShortUrl;
 using System.Threading.Tasks;
-
+using System.Security.Cryptography;
+using System.Text;
+using Canducci.YoutubeThumbnail;
+using System.Collections.Generic;
+using System.Linq;
 namespace WebAppSitePackages.Controllers
 {
     [RoutePrefix("operation")]
@@ -185,5 +190,131 @@ namespace WebAppSitePackages.Controllers
         }
         #endregion Gravatar
 
+        #region ShortUrlOperation
+        [HttpPost]
+        [Route("shorturl")]
+        public async Task<JsonResult> ShortUrl(string Url)
+        {
+            string servePath = Server.MapPath("~");
+            string nameJson = string.Format("/json/{0}.json", renderHash(Url));
+            string path = string.Format("{0}/{1}", servePath, nameJson);
+
+            try
+            {
+                Validation.IsUrl(Url, "Url is invalid");
+                string Content = System.IO.File.Exists(path) ? System.IO.File.ReadAllText(path) : null;
+                if (Content == null)
+                {
+
+                    string ApiKey = "36b56b77ac24e5595b626b38c6e00074";
+
+                    ShortUrlClient Client = new ShortUrlClient(ApiKey);
+                    ShortUrlSend Send = new ShortUrlSend(Url);
+                    ShortUrlReceive Receive = await Client.ReceiveAsync(Send);
+
+                    System.IO.File.WriteAllText(path, Receive.ToJson());
+
+                    return Json(new { data = Receive, error = false }, JsonRequestBehavior.DenyGet);
+
+                }
+
+                return Json(new { data = await Task.FromResult(new ShortUrlReceive(Content, Url)), error = false }, JsonRequestBehavior.DenyGet);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = true, data = ' ', exception = ex.Message });
+            }
+        }
+        private async Task<string> RenderHash(string Value)
+        {
+            return await Task.FromResult(renderHash(Value));
+        }
+        private string renderHash(string Value)
+        {
+            try
+            {
+                MD5 md5 = MD5.Create();
+                byte[] valueToArray = md5.ComputeHash(Encoding.UTF8.GetBytes(Value));
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < valueToArray.Length; i++)
+                {
+                    sBuilder.Append(valueToArray[i].ToString("x2"));
+                }
+                md5.Dispose();
+                return sBuilder.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
+        }
+        #endregion
+
+        #region ThumbnailOp
+        [HttpPost]
+        [Route("Thumbnail")]
+        public async Task<JsonResult> Thumbnail(string Url)
+        {            
+            try
+            {
+                Validation.IsUrl(Url, "Url Invalid");
+
+                Thumbnail thumb = new Thumbnail(Url);
+
+                string code = thumb.ThumbnailPicture0.Code;
+                if (!string.IsNullOrEmpty(code))
+                {
+                    ThumbnailResult rpic0 = await thumb.ThumbnailPicture0.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rpic1 = await thumb.ThumbnailPicture1.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rpic2 = await thumb.ThumbnailPicture2.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rpic3 = await thumb.ThumbnailPicture3.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rdef = await thumb.ThumbnailPictureDefault.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rhg = await thumb.ThumbnailPictureHightQuality.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rmx = await thumb.ThumbnailPictureMaxResolution.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rmq = await thumb.ThumbnailPictureMediumQuality.SaveAsAsync("thumb/", Server.MapPath("~"));
+                    ThumbnailResult rst = await thumb.ThumbnailPictureStandard.SaveAsAsync("thumb/", Server.MapPath("~"));
+
+                    string pic0 = thumb.ThumbnailPicture0.PathWeb;
+                    string pic1 = thumb.ThumbnailPicture1.PathWeb;
+                    string pic2 = thumb.ThumbnailPicture2.PathWeb;
+                    string pic3 = thumb.ThumbnailPicture3.PathWeb;
+                    string def = thumb.ThumbnailPictureDefault.PathWeb;
+                    string hg = thumb.ThumbnailPictureHightQuality.PathWeb;
+                    string mx = thumb.ThumbnailPictureMaxResolution.PathWeb;
+                    string mq = thumb.ThumbnailPictureMediumQuality.PathWeb;
+                    string st = thumb.ThumbnailPictureStandard.PathWeb;
+                    string embed = thumb.VideoEmbed();
+                    string share = thumb.VideoShare;
+
+                    var datas = new
+                    {
+                        pic0 = new { picture = pic0, status = rpic0.Exception == null },
+                        pic1 = new { picture = pic1, status = rpic1.Exception == null },
+                        pic2 = new { picture = pic2, status = rpic2.Exception == null },
+                        pic3 = new { picture = pic3, status = rpic3.Exception == null },
+                        def = new { picture = def, status = rdef.Exception == null },
+                        hg = new { picture = hg, status = rhg.Exception == null },
+                        mx = new { picture = mx, status = rmx.Exception == null },
+                        mq = new { picture = mq, status = rmq.Exception == null },
+                        st = new { picture = st, status = rst.Exception == null },
+                        embed = embed,
+                        share = share,
+                        code = code
+                    };
+
+                    return Json(new { data = datas, error = false });
+                }
+                else
+                {
+                    return Json(new { data = ' ', error = true });
+                }             
+            }
+            catch (Exception ex)
+            {
+                return Json(new { data = ' ', error = true, exception = ex });
+            }
+        }
+        #endregion
     }
 }

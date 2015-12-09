@@ -48,6 +48,10 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Canducci YoutubeThumbnail, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CanducciYoutubeThumbnail.0.0.2\lib\net451\Canducci YoutubeThumbnail.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Canducci.Forecast, Version=0.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Canducci.Forecast.0.0.1\lib\net451\Canducci.Forecast.dll</HintPath>
       <Private>True</Private>
@@ -58,6 +62,10 @@
     </Reference>
     <Reference Include="Canducci.QuoteDolar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CanducciQuoteDolar.1.0.0\lib\net451\Canducci.QuoteDolar.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Canducci.ShortUrl, Version=0.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CanducciShortUrl.0.0.2\lib\net451\Canducci.ShortUrl.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Canducci.Zip, Version=2.0.0.2, Culture=neutral, processorArchitecture=MSIL">
@@ -177,6 +185,8 @@
     <Content Include="image\1443677268_Money-Increase.png" />
     <Content Include="image\1447477148_Weather.png" />
     <Content Include="image\1448080159_user_man_zpstezr3nie.png" />
+    <Content Include="image\1449170629_Neon_Line_Social_Circles_50Icon_10px_grid-45.png" />
+    <Content Include="image\1449629657_Location HTTP.png" />
     <Content Include="image\ajax-loader.gif" />
     <Content Include="image\zipcode.png" />
     <Content Include="Scripts\angular-animate.js" />
@@ -210,6 +220,7 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\angular-youtube-mb.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -219,6 +230,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include=".travis.yml" />
+    <Content Include="json\6bf5981f0aa3d056f6ed738d7082b921.json" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -984,6 +996,7 @@
     <Content Include="Scripts\ie8-responsive-file-warning.js" />
     <Content Include="Scripts\angular-moment.min.js.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\iframe_api.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -1002,6 +1015,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="thumb\1yJm7KJ6fNg-Default.jpg" />
     <Content Include="Views\View\Cotacao.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1024,6 +1038,8 @@
     <Content Include="Views\View\Address.cshtml" />
     <Content Include="Views\View\Forecast.cshtml" />
     <Content Include="Views\View\Gravatar.cshtml" />
+    <Content Include="Views\View\ShortUrl.cshtml" />
+    <Content Include="Views\View\Thumbnail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

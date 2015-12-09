@@ -1,4 +1,4 @@
-﻿var app = angular.module("app", ['ngRoute', 'ui.router']);
+﻿var app = angular.module("app", ['ngRoute', 'ui.router','youtube-embed']);
 
 //app.run(function (amMoment) {
 //    amMoment.changeLocale('pt-BR');
@@ -46,12 +46,23 @@ app.config(['$routeProvider',
               templateUrl: '/view/gravatar',
               controller: 'gravatar'
           })
+          .when('/shorturl', {
+              templateUrl: '/view/shorturl',
+              controller: 'shorturl'
+          })
+          .when('/thumbnail', {
+              templateUrl: '/view/thumbnail',
+              controller: 'thumbnail'
+          })
           .otherwise({ redirectTo: '/' });
   }]);
-app.controller('menu', function ($scope, $routeParams, $http) {
-
-
-
+app.controller('menu', function ($scope, $routeParams, $http)
+{
+    $scope.load = function()
+    {
+        ancoraSet("up");
+    }
+    $scope.load();
 });
 app.controller('cotacao', function ($scope, $routeParams, $http) {
 
@@ -271,6 +282,111 @@ app.controller('gravatar', function ($scope, $routeParams, $http)
         }
         else {
             alert('Digite o e-mail não existe')
+        }
+    }
+    $scope.clear();
+});
+app.controller('shorturl', function ($scope, $routeParams, $http) {
+
+    $scope.loading = false;
+    $scope.data = {};
+    $scope.message = '';
+    $scope.url = '';
+
+    //{"ShortUrl":"https://tr.im/elGg5","Keyword":"elGg5","Url":"http://www.uol.com.br/"}
+
+    $scope.clear = function ()
+    {        
+        $scope.loading = false;
+        $scope.data = {};
+        $scope.message = '';
+        $scope.url = '';
+        ancoraSet("up");
+    }
+
+    $scope.submit = function () 
+    {
+        if ($scope.url !== '' && is_valid_url($scope.url))
+        {
+            $scope.loading = true;
+            $http.post('/operation/shorturl', { 'Url': $scope.url })
+                .success(function (data) {
+                    if (data.error == false) {
+                        var d = data.data;
+                        $scope.data.shorturl = d.ShortUrl;
+                        $scope.data.Keyword = d.Keyword;
+                        $scope.data.url = d.Url;
+                        $scope.data.erro = false;
+                        $scope.message = '';
+                    }
+                    else {
+                        $scope.message = 'Url inválida';
+                    }
+                    $scope.loading = false;
+                })
+                .error(function (data) {
+                    $scope.clear();
+                });
+        }
+        else
+        {
+            alert('Digite uma url válida');
+        }
+    }
+    $scope.clear();
+});
+app.controller('thumbnail', function ($scope, $routeParams, $http) {
+
+    $scope.loading = false;
+    $scope.data = {};
+    $scope.message = '';
+    $scope.url = '';    
+
+    $scope.clear = function () {
+        $scope.loading = false;
+        $scope.data = {};
+        $scope.message = '';
+        $scope.url = '';
+        ancoraSet("up");
+    }
+    /*
+    {"data":{"pic0":"/thumb/Grdz-5QR2Tk-Picture0.jpg"
+        ,"pic1":"/thumb/Grdz-5QR2Tk-Picture1.jpg"
+        ,"pic2":"/thumb/Grdz-5QR2Tk-Picture2.jpg"
+        ,"pic3":"/thumb/Grdz-5QR2Tk-Picture3.jpg"
+        ,"def":"/thumb/Grdz-5QR2Tk-Default.jpg"
+
+        ,"hg":"/thumb/Grdz-5QR2Tk-HightQuality.jpg"
+        ,"mx":"/thumb/Grdz-5QR2Tk-MaxResolution.jpg"
+        ,"mq":"/thumb/Grdz-5QR2Tk-MediumQuality.jpg"
+        ,"st":"/thumb/Grdz-5QR2Tk-Standard.jpg"
+        ,"embed":"\u003ciframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/Grdz-5QR2Tk\" frameborder=\"0\" allowfullscreen\u003e\u003c/iframe\u003e"
+        ,"share":"https://youtu.be/Grdz-5QR2Tk"},"error":false}
+        */
+    $scope.submit = function () {
+        if ($scope.url !== '' && is_valid_url($scope.url)) {
+            $scope.loading = true;
+            $http.post('/operation/thumbnail', { 'Url': $scope.url })
+                .success(function (data) {
+                    if (data.error == false) {
+                        var d = data.data;
+                        $scope.data = d;                        
+                        $scope.data.erro = false;
+                        $scope.message = '';                        
+                    }
+                    else
+                    {
+                        $scope.clear();
+                        $scope.message = 'Url inválida';
+                    }
+                    $scope.loading = false;
+                })
+                .error(function (data) {
+                    $scope.clear();
+                });
+        }
+        else {
+            alert('Digite uma url válida');
         }
     }
     $scope.clear();

@@ -1,0 +1,109 @@
+﻿@{ Layout = null; }
+
+<div class="panel panel-default" ng-controller="thumbnail">
+    <div class="panel-heading">Thumbnais (Miniaturas do YouTube e Video Incorporado e Compartilhado)</div>
+    <div class="panel-body" style="min-height:450px">
+        <div class="row">
+            <div class="col-lg-12">
+                <h5>Informe o Endereço de Internet do You Tube</h5>
+                <hr />
+                <div class="form-group col-lg-10" style="height:40px;">
+                    <form ng-submit="submit();" class="form-inline" role="form" id="form1" style="width:100%">
+                        <div class="form-group">
+                            <input type="url" class="form-control" id="url" ng-model="url" placeholder="Digite o endereço" required="required" autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span> Buscar
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="clear();">
+                            <span class="glyphicon glyphicon-remove"></span> Limpar
+                        </button>
+                    </form>
+                    <br />
+                    <div ng-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+                </div>
+                <div class="form-group col-lg-2" style="height:40px;">
+                    <p ng-if="loading"><img src="/image/ajax-loader.gif" border="0" style="border:0px; vertical-align:middle" /></p>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+        <div class="row">
+            <div class="col-lg-12">
+                <h5>Resultado</h5>
+                <hr />
+                <div ng-if="data.erro == false">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="25%">
+                                    <div ng-if="data.def.status">
+                                        <em>Foto Default:</em>
+                                        <p class="text-primary"><img ng-src="{{data.def.picture}}" border="0" /></p>
+                                    </div>
+                                </td>
+                                <td width="25%">
+                                    <div ng-if="data.pic1.status">
+                                        <em>Foto 1:</em>
+                                        <p class="text-primary"><img ng-src="{{data.pic1.picture}}" border="0" /></p>
+                                    </div>
+                                </td>
+                                <td width="25%">
+                                    <div ng-if="data.pic2.status">
+                                        <em>Foto 2:</em>
+                                        <p class="text-primary"><img ng-src="{{data.pic2.picture}}" border="0" /></p>
+                                    </div>
+                                </td>
+                                <td width="25%">
+                                    <div ng-if="data.pic3.status">
+                                        <em>Foto 3:</em>
+                                        <p class="text-primary"><img ng-src="{{data.pic3.picture}}" border="0" /></p>
+                                    </div>
+                                </td>
+                            </tr>                            
+                            <tr ng-if="data.pic0.status">
+                                <td colspan="4">
+                                    <em>Foto 0:</em>
+                                    <p class="text-primary"><img ng-src="{{data.pic0.picture}}" border="0" /></p>
+                                </td>                                
+                            </tr>                       
+                            <tr ng-if="data.hg.status">
+                                <td colspan="4">
+                                    <em>Foto alta definição:</em>
+                                    <p class="text-primary"><img ng-src="{{data.hg.picture}}" border="0" /></p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.mx.status">
+                                <td colspan="4">
+                                    <em>Foto máxima resolução:</em>
+                                    <p class="text-primary"><img ng-src="{{data.mx.picture}}" border="0" style="max-width: 85%" /></p>
+                                </td>
+                            </tr>
+                            <tr ng-if="data.mg.status">
+                                <td colspan="4">
+                                    <em>Foto qualidade média:</em>
+                                    <p class="text-primary"><img ng-src="{{data.mg.picture}}" border="0" /></p>
+                                </td>
+                            </tr> 
+                            <tr ng-if="data.st.status">
+                                <td colspan="4">
+                                    <em>Foto padrão:</em>
+                                    <p class="text-primary"><img ng-src="{{data.st.picture}}" border="0" /></p>
+                                </td>
+                            </tr> 
+                            <tr ng-if="data.embed">
+                                <td colspan="4">
+                                    <p>Link de compartilhamento para Rede Sociais</p>
+                                    <p><a href="{{data.share}}">{{data.share}}</a></p>
+                                    <p>Incorporar Video:</p>
+                                    <youtube-video video-id="data.code"></youtube-video>
+                                </td>
+                            </tr> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><a href="/#/" class="btn btn-success"><span class="glyphicon glyphicon-arrow-left"></span> Voltar</a></div>
+</div>

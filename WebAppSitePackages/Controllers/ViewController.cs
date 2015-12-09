@@ -56,5 +56,17 @@ namespace WebAppSitePackages.Controllers
         {
             return View();
         }
+
+        [Route("shorturl")]
+        public ActionResult ShortUrl()
+        {
+            return View();
+        }
+
+        [Route("thumbnail")]
+        public ActionResult Thumbnail()
+        {
+            return View();
+        }
     }
 }
