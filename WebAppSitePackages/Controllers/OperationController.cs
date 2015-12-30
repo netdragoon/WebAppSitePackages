@@ -13,7 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Canducci.YoutubeThumbnail;
 using System.Collections.Generic;
-using System.Linq;
+
 namespace WebAppSitePackages.Controllers
 {
     [RoutePrefix("operation")]
@@ -22,7 +22,7 @@ namespace WebAppSitePackages.Controllers
         #region ZipCodeOperation
         [Route("zipcode")]
         [HttpPost()]
-        public JsonResult zipcode(string cep)
+        public async Task<JsonResult> zipcode(string cep)
         {
 
             ZipCodeInfo data = CacheGet(cep);
@@ -30,7 +30,9 @@ namespace WebAppSitePackages.Controllers
             if (data == null)
             {
 
-                data = ZipCodeLoad.Find(cep);
+                ZipCodeLoad zipCodeLoad = new ZipCodeLoad();
+
+                data = await zipCodeLoad.FindAsync(cep);
                 
                 CacheSave(cep, data);
 
@@ -72,14 +74,15 @@ namespace WebAppSitePackages.Controllers
 
         #region AddressOperation
         [HttpPost]
-        public JsonResult Address(string uf, string city, string address)
+        public async Task<JsonResult> Address(string uf, string city, string address)
         {
             try
             {
+                ZipCodeLoad zipCodeLoad = new ZipCodeLoad();
 
-                ZipCodeUF zipcodeUf = (ZipCodeUF)Enum.Parse(typeof(ZipCodeUF), uf, true);
+                ZipCodeUf zipcodeUf = (ZipCodeUf)Enum.Parse(typeof(ZipCodeUf), uf, true);
 
-                ZipCodeInfo[] data = ZipCodeLoad.Address(zipcodeUf, city, address);
+                ZipCodeInfo[] data = await zipCodeLoad.AddressAsync(zipcodeUf, city, address);
 
                 return Json(data, JsonRequestBehavior.DenyGet);
 
@@ -200,17 +203,16 @@ namespace WebAppSitePackages.Controllers
             string path = string.Format("{0}/{1}", servePath, nameJson);
 
             try
-            {
-                Validation.IsUrl(Url, "Url is invalid");
+            {                
                 string Content = System.IO.File.Exists(path) ? System.IO.File.ReadAllText(path) : null;
                 if (Content == null)
                 {
 
-                    string ApiKey = "36b56b77ac24e5595b626b38c6e00074";
+                    IsGd isGD = new IsGd(Url);
 
-                    ShortUrlClient Client = new ShortUrlClient(ApiKey);
-                    ShortUrlSend Send = new ShortUrlSend(Url);
-                    ShortUrlReceive Receive = await Client.ReceiveAsync(Send);
+                    ShortUrlClient Send = new ShortUrlClient(isGD);
+
+                    ShortUrlReceive Receive = await Send.ReceiveAsync();
 
                     System.IO.File.WriteAllText(path, Receive.ToJson());
 
@@ -218,7 +220,9 @@ namespace WebAppSitePackages.Controllers
 
                 }
 
-                return Json(new { data = await Task.FromResult(new ShortUrlReceive(Content, Url)), error = false }, JsonRequestBehavior.DenyGet);
+                Dictionary<object, object> _data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<object, object>>(Content);
+                dynamic _result = new { ShortUrl = _data["url"], LongUrl = _data["longurl"], Keyword = _data["keyword"] };
+                return Json(new { data = _result, error = false }, JsonRequestBehavior.DenyGet);
 
             }
             catch (Exception ex)
@@ -257,8 +261,7 @@ namespace WebAppSitePackages.Controllers
         public async Task<JsonResult> Thumbnail(string Url)
         {            
             try
-            {
-                Validation.IsUrl(Url, "Url Invalid");
+            {                
 
                 Thumbnail thumb = new Thumbnail(Url);
 

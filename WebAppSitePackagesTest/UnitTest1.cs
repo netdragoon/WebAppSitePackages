@@ -10,14 +10,16 @@ namespace WebAppSitePackagesTest
         [TestMethod]
         public void ZipCodeNotError()
         {
-            ZipCodeInfo zip = ZipCodeLoad.Find("19200000");
+            ZipCodeLoad zipLoad = new ZipCodeLoad();
+            ZipCodeInfo zip = zipLoad.Find("19200000");
             Assert.AreEqual(true, !zip.Erro);
         }
 
         [TestMethod]
         public void ZipCodeError()
         {
-            ZipCodeInfo zip = ZipCodeLoad.Find("19200000");
+            ZipCodeLoad zipLoad = new ZipCodeLoad();
+            ZipCodeInfo zip = zipLoad.Find("19200000");
             Assert.AreEqual(false, zip.Erro);
         }
 
