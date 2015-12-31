@@ -60,8 +60,8 @@
       <HintPath>..\packages\Canducci.Gravatar.0.0.2\lib\net451\Canducci.Gravatar.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Canducci.QuoteDolar, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CanducciQuoteDolar.1.0.0\lib\net451\Canducci.QuoteDolar.dll</HintPath>
+    <Reference Include="Canducci.QuoteDolar, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CanducciQuoteDolar.2.0.0\lib\net451\Canducci.QuoteDolar.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Canducci.ShortUrl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

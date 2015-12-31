@@ -59,16 +59,18 @@ namespace WebAppSitePackages.Controllers
         #region CotacaoDolarOperation
         [Route("cotacao")]
         [HttpPost()]
-        public JsonResult CotacaoDolar()
+        public async Task<JsonResult> CotacaoDolar()
         {
             DolarInfo dolarInfo = null;
             using (Dolar dolar = new Dolar())
             {
-                dolarInfo = dolar.DolarInfo();
+                dolarInfo = await dolar.DolarInfoAsync();
             }
-            RatesInfo data = dolarInfo.RatesInfo.GetRatesInfo(RatesInfoType.USDBRL);
+
+            RatesInfo data = dolarInfo.RatesInfo.GetRatesInfoUSDBRL();
             
             return Json(data, JsonRequestBehavior.DenyGet);
+
         }
         #endregion
 
